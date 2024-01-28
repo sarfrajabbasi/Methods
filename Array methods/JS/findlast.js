@@ -53,3 +53,35 @@ const lasttrough = numbers
   });
 
 console.log(lasttrough);
+
+// Using findLast() on sparse arrays:Empty slots in sparse arrays are visited, and are treated the same as undefined.
+
+const array = [0, 1, , , , 5, 6];
+
+console.log(
+  array.findLast((value, index) => {
+    console.log(`Visited index ${index} with value ${value}`);
+  })
+);
+
+array.findLast((value, index) => {
+  if (index === 6) {
+    console.log(`Deleting array[5] with value ${array[5]}`);
+    delete array[5];
+  }
+  // Element 5 is still visited even though deleted
+  console.log(`Visited index ${index} with value ${value}`);
+});
+
+// Calling findLast() on non-array objects :-- The findLast() method reads the length property of this and then accesses each property whose key is a nonnegative integer less than length.
+
+const arrayLike = {
+  length: 3,
+  0: 2,
+  1: 7.3,
+  2: 4,
+  3: 3, // ignored by findLast() since length is 3
+};
+
+console.log(Array.prototype.findLast.call(arrayLike,(x)=> Number.isInteger(x)));//4
+
