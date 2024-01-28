@@ -28,15 +28,28 @@ function isPrime(element) {
   }
 
   for (let factor = 3; factor <= Math.sqrt(element); factor += 2) {
-      if (element % factor === 0) {
-          return false
-        }
+    if (element % factor === 0) {
+      return false;
     }
-  return true
+  }
+  return true;
 }
 
-
-const arr1 = [1,2,4,6,9,12,16,18,20]
-const arr2 = [1,2,3,4,5,6,6,9,11,23,27,33,37,47,43,21];
+const arr1 = [1, 2, 4, 6, 9, 12, 16, 18, 20];
+const arr2 = [1, 2, 3, 4, 5, 6, 6, 9, 11, 23, 27, 33, 37, 47, 43, 21];
 console.log(arr1.findLast(isPrime));
 console.log(arr2.findLast(isPrime));
+
+// Using the third argument of callbackFn :The "array" argument is useful if you want to access another element in the array, especially when you don't have an existing variable that refers to the array.
+
+const numbers = [3, -1, 1, 4, 1, 5, 9, 2, 6];
+
+const lasttrough = numbers
+  .filter((num) => num > 0)
+  .findLast((num, idx, arr) => {
+    if (idx > 0 && num >= arr[idx - 1]) return false;
+    if (idx < arr.length && num >= arr[idx + 1]) return false;
+    return true;
+  });
+
+console.log(lasttrough);
