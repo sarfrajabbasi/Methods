@@ -69,3 +69,37 @@ const obj = new Counter();
 obj.add([2,4,5,6,7]);
 console.log(obj.count);
 console.log(obj.sum);
+
+// Flatten an array(infinite)
+
+const flatten = (arr)=>{
+    const result =[];
+
+    arr.forEach((item)=>{
+        if(Array.isArray(item)){
+            // recusive
+            result.push(...flatten(item))
+        }else{
+            // base
+            result.push(item)
+        }
+    })
+
+    return result
+
+}
+
+// Usage
+const nested = [1, 2, 3, [4, 5, [6,[2,[2,[2,[2]]]], 7], 8, 9]];
+console.log(flatten(nested)); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+// Using the third argument of callbackFn
+
+
+const numbers = [3, -1, 1, 4, 1, 5];
+
+numbers.filter((num)=>num>0).forEach((num,idx,arr)=>{
+    console.log(arr[idx-1],num,arr[idx+1]);
+})
+
