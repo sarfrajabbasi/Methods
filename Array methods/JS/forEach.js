@@ -103,3 +103,28 @@ numbers.filter((num)=>num>0).forEach((num,idx,arr)=>{
     console.log(arr[idx-1],num,arr[idx+1]);
 })
 
+const arraySparse = [1, 3, /* empty */, 7];
+let numCallbackRuns = 0;
+
+
+arraySparse.forEach((el)=>{
+    // not invoked for the missing value
+console.log({el});
+numCallbackRuns++
+})
+
+console.log({numCallbackRuns});
+
+// Calling forEach() on non-array objects
+
+
+const arrayLike = {
+    length: 3,
+    0: 2,
+    1: 3,
+    2: 4,
+    3: 5, // ignored by forEach() since length is 3
+  };
+  Array.prototype.forEach.call(arrayLike,(x)=>{
+      console.log(x)
+    })
