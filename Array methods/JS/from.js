@@ -64,5 +64,18 @@ const mapper = new Map([
  console.log(Array.from(mapper.keys()));
 
 
- 
+
 //  Array from a NodeList
+// // Create an array based on a property of DOM Elements
+
+const images = document.querySelectorAll('img');
+const sources = Array.from(images,image=> image.src);
+console.log(sources);
+const insecureSources = sources.filter((link)=> link.startsWith('http://'));
+console.log(insecureSources);
+
+function f(){
+   return Array.from(arguments)
+}
+
+console.log(f(1,2,3,4,5,6,6));
