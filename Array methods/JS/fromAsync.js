@@ -76,5 +76,52 @@ Array.fromAsync(
 
 // Comparison with Promise.all():-- Array.fromAsync() awaits each value yielded from the object sequentially. Promise.all() awaits all values concurrently.
 
+function* MakeIterableOfPromises(){
+    for(let i=0;i<5;i++){
+        yield new Promise((resolve)=>{
+            setTimeout(resolve, 100);
+        })
+    }
+}
 
 
+(async ()=>{
+    console.time('Arry.fromAsync() time');
+    await Array.fromAsync(MakeIterableOfPromises());
+    console.timeEnd('Array.fromAsync() time');
+    //Array.fromAsync() time :503.6101ms
+
+    console.time('Arry.fromAsync() time');
+    await Promise.all(MakeIterableOfPromises());
+    console.timeEnd('Array.fromAsync() time');
+    //Promise.all() time :503.6101ms
+})
+
+
+
+// No error handling for sync iterables :-- Similar to for await...of, if the object being iterated is a sync iterable, and an error is thrown while iterating, the return() method of the underlying iterator will not be called, so the iterator is not closed.
+
+function* generatorWithRejectedPromises(){
+    try{
+        yield 0;
+        yield Promise.reject(3);
+    }finally{
+        console.log('called finally');
+    }
+}
+
+(async ()=>{
+    try{
+        // await Array.fromAsync(generatorWithRejectedPromises())
+        // If you need to close the iterator, you need to use a for...of loop instead, and await each value yourself.
+        for (const val of generatorWithRejectedPromises()) {
+            arr.push(await val);
+          }
+
+    }catch(e){
+        console.log('caught',e);
+    }
+})();
+
+//caught 3
+// No "called finally" message
