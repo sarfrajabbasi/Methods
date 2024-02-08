@@ -74,8 +74,25 @@ console.log(sources);
 const insecureSources = sources.filter((link)=> link.startsWith('http://'));
 console.log(insecureSources);
 
+
+// Array from an Array-like object (arguments)
+
 function f(){
    return Array.from(arguments)
 }
 
 console.log(f(1,2,3,4,5,6,6));
+
+// Using arrow functions and Array.from()
+// Using an arrow function as the map function to
+
+console.log(Array.from([1,2,3],x=>x+x));
+
+
+// Generate a sequence of numbers
+// Since the array is initialized with `undefined` on each position,
+// the value of `v` below will be `undefined`
+console.log(Array.from({length:5},(v,i)=>i));
+// [0, 1, 2, 3, 4]
+
+
