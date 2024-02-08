@@ -113,3 +113,15 @@ console.log(range(1,10,2));
 
 
 console.log(range('A'.charCodeAt(0),"z".charCodeAt(0),1).map(x=>String.fromCharCode(x)));
+
+// Calling from() on non-array constructors
+
+function  notArr(len){
+   console.log("NotArray called with length", len);
+
+}
+
+console.log(Array.from.call(notArr,new Set(['foo','bax','baz'])));
+console.log(Array.from.call(notArr,{length:1,0:'foo'}));
+
+console.log(Array.from.call({},{length:1,0:'foo'}));//['foo']
