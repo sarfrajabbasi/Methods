@@ -98,14 +98,18 @@ console.log(Array.from({ length: 5 }, (v, i) => i));
 // Sequence generator (range)
 
 const range = (start, stop, step) => {
+   // console.log({ length: stop - start / step + 1 });
   return Array.from(
     { length: stop - start / step + 1 },
     (_, i) => start + i * step
   );
 };
-
 // Generate numbers range 0..4
 
-console.log(range(1, 4, 0));
+console.log(range(0,4,1));
 
 // Generate numbers range 1..10 with step of 2
+console.log(range(1,10,2));
+
+
+console.log(range('A'.charCodeAt(0),"z".charCodeAt(0),1).map(x=>String.fromCharCode(x)));
