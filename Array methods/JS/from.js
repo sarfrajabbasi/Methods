@@ -123,5 +123,6 @@ function  notArr(len){
 
 console.log(Array.from.call(notArr,new Set(['foo','bax','baz'])));
 console.log(Array.from.call(notArr,{length:1,0:'foo'}));
+// When the this value is not a constructor, a plain Array object is returned.
 
 console.log(Array.from.call({},{length:1,0:'foo'}));//['foo']
